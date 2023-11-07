@@ -2,9 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
-  token: null,
+  username: null,
   imageProfile: null,
-  localId: null,
 }
 
 export const authSlice = createSlice({
@@ -13,13 +12,13 @@ export const authSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       return {
+        id_user: action.payload.id_user,
         user: action.payload.email,
-        token: action.payload.idToken,
-        localId: action.payload.localId,
+        username: action.payload.username
       }
     },
     clearUser: () => {
-      return { user: null, token: null, localId: null }
+      return { user: null, username: null }
     },
     setImageProfile: (state, action) => {
       return {

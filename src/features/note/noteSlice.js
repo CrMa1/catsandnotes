@@ -11,7 +11,7 @@ export const noteSlice = createSlice({
     reducers: {
         setNote: (state, action) => {
             return {
-                note: action.payload,
+                note : [...note,action.payload],
             }
         },
     }

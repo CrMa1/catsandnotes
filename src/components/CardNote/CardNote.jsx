@@ -1,13 +1,16 @@
-import { View, Text, Pressable } from 'react-native'
+import { Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import styles from './CardNote.style'
 
-const CardNote = ({ data }) => {
+const CardNote = ({ data, navigation }) => {
   return (
     <>
-      <Pressable style={styles.container}>
-        <Text>{data.title}</Text>
-      </Pressable>
+      <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Notes', { title: data.title })} >
+        <Image
+          style={styles.images}
+          source={data.image}
+        />
+      </TouchableOpacity>
     </>
 
   )

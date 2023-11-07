@@ -4,17 +4,11 @@ import { colors } from '../../constants/colors'
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.white,
     justifyContent:'center',
     alignItems: 'center',
-    backgroundColor: colors.white,
   },
-  listContainer: {
-    flex:1,
-    width: '90%',
+  imageLogin: {
+    marginBottom: 40
   },
-  lblTitle: {
-    fontSize: 26,
-    textAlign: 'center',
-    marginVertical: 20
-  }
 })

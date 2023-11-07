@@ -35,4 +35,8 @@ export default styles = StyleSheet.create({
   noAccount: {
     marginTop: 20
   },
+  errorDialog: {
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+  },
 })

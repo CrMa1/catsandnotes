@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react'
 import { View, Text, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
-import { Input, Dialog } from '@rneui/themed'
+import { Input } from '@rneui/themed'
 import styles from './SignUp.style'
-import { useSignUpMutation } from '../../services/authApi'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../../features/auth/authSlice'
 import { insertSession } from '../../db'
+import DialogAlert from '../../components/Dialog/DialogAlert'
+import { Register } from '../../services/authApiAxios'
 
 const SignUp = ({ navigation }) => {
 
@@ -16,7 +17,7 @@ const SignUp = ({ navigation }) => {
   const refEmail = useRef();
   const refPassword = useRef();
 
-  //Guarda los datos del form
+  //Variables para el form
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -40,38 +41,34 @@ const SignUp = ({ navigation }) => {
 
   //Alerta de errores
   const [dialogVisible, setDialogVisible] = useState(false);
-
-  //Trigger de la función para el registro
-  const [triggerSignup, result] = useSignUpMutation()
+  const [dialogTxt, setDialogTxt] = useState('Ocurrió un error inesperado, inténtalo más tarde.');
 
   //Ejecuta el Registro
-  const signUp = () => {
+  const signUp = async () => {
 
     //Errores para inputs vacíos
     name === '' ? setErrorName('Inresa un Nombre') : setErrorName('')
     email === '' ? setErrorEmail('Inresa un Correo') : setErrorEmail('')
     password === '' ? setErrorPass('Inresa una Contraseña') : setErrorPass('')
     if (name === '' || email === '' || password === '') { return false }
+
+    const response = await Register({ name: name, email: email, password: password });
     
-    //Trigger para el Registro
-    triggerSignup({
-      email,
-      password
-    })
-      .unwrap()
-      .then(result => {
-        dispatch(setUser(result))
-        insertSession({
-          localId: result.localId,
-          email: result.email,
-          token: result.idToken,
-          username: name,
-        })
+    //Si se registra con éxito, se inicia sesión
+    if (response.code===200) {
+      dispatch(setUser({ id_user:response.dataUser[0], email: email,username: response.dataUser[1]}))
+      insertSession({
+        id_user: response.dataUser[0],
+        email: email,
+        username: response.dataUser[1]
       })
-      .catch(
-        err =>
-          console.log(err)
-      )
+    }else if(response.code===400){
+      setDialogTxt('La cuenta ya se encuentra registrada, inicia sesión!')
+      toggleDialog()
+    }else{
+      setDialogTxt('Ocurrió un error inesperado, inténtalo más tarde.')
+      toggleDialog()
+    }
   }
 
   const toggleDialog = () => {
@@ -126,16 +123,7 @@ const SignUp = ({ navigation }) => {
       </View>
       <View style={styles.bobbleBottom}></View>
       <View style={styles.bobbleTop}></View>
-      <Dialog
-        isVisible={dialogVisible}
-      >
-        <View style={styles.errorDialog}>
-          <Dialog.Title title="Error" />
-          <Dialog.Button title="x" onPress={toggleDialog} style={{marginTop:-10}} />
-        </View>
-
-        <Text>Ocurrió un error inesperado, inténtalo más tarde.</Text>
-      </Dialog>
+      <DialogAlert dialogVisible={dialogVisible} styleError={styles.errorDialog} title='Error' toggleDialog={toggleDialog} text={dialogTxt} />
     </KeyboardAvoidingView>
   )
 }

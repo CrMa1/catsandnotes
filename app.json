@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#E2F0CB"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -25,6 +25,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Solo accedemos a tu cámara para que puedas cambiar tu foto de peril."
+        }
+      ]
+    ]
   }
 }

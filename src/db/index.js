@@ -6,7 +6,7 @@ export const init = () => {
   const promise = new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'CREATE TABLE IF NOT EXISTS sessions (localId TEXT PRIMARY KEY NOT NULL , email TEXT NOT NULL, token TEXT NOT NULL, username TEXT NOT NULL)',
+        'CREATE TABLE IF NOT EXISTS sessions (id_user INT NOT NULL, image_profile TEXT NOT NULL, email TEXT NOT NULL, username TEXT NOT NULL)',
         [],
         () => resolve(),
         (_, error) => {
@@ -18,13 +18,12 @@ export const init = () => {
   return promise
 }
 
-
-export const insertSession = ({ localId, email, token, username }) => {
+export const insertSession = ({ id_user, image_profile, email, username }) => {
   const promise = new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        'INSERT INTO sessions (localId, email, token, username) VALUES (?, ?, ?, ?);',
-        [localId, email, token, username],
+        'INSERT INTO sessions (id_user, image_profile, email, username) VALUES (?, ?, ?, ?);',
+        [id_user, image_profile, email, username],
         (_, result) => resolve(result),
         (_, error) => reject(error)
       )
@@ -39,8 +38,8 @@ export const fetchSession = () => {
       tx.executeSql(
         'SELECT * FROM sessions',
         [],
-        (_, result) => resolve(result),
-        (_, error) => reject(error)
+        (txObj, { rows: { _array } }) => resolve(_array),
+        (txObj, error) => reject('Error ', error)
       )
     })
   })
@@ -53,6 +52,21 @@ export const deleteSession = () => {
       tx.executeSql(
         'DELETE FROM sessions',
         [],
+        (_, result) => resolve(result),
+        (_, error) => reject(error)
+      )
+    })
+  })
+  return promise
+}
+
+
+export const updateSession = ({image_profile, email, username}) => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'UPDATE sessions SET image_profile = ?, email = ?, username = ?',
+        [image_profile, email, username],
         (_, result) => resolve(result),
         (_, error) => reject(error)
       )

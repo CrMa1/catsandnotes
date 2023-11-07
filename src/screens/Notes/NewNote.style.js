@@ -8,6 +8,15 @@ export default styles = StyleSheet.create({
     paddingTop:'25%',
     justifyContent:'center',
   },
+  contentImage: {
+    flex: 1,
+    backgroundColor: colors.white,
+    justifyContent:'center',
+    alignItems: 'center',
+  },
+  imageLogin: {
+    marginBottom: 40
+  },
   inputDescription: {
     backgroundColor: colors.melon,
     width:'90%',
