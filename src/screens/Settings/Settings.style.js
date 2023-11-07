@@ -8,6 +8,25 @@ export default styles = StyleSheet.create({
     justifyContent:'center',
     alignItems: 'center',
   },
+  noImage: {
+    width: 190,
+    height: 150,
+  },
+  buttonConfirm: {
+    width: "100%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    backgroundColor: colors.aqua,
+  },
+  settingsContainer: {
+    width:'100%',
+    paddingHorizontal: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   buttonsImages: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -15,22 +34,16 @@ export default styles = StyleSheet.create({
     flexDirection: 'row', 
     justifyContent: 'space-between', 
   },
-  loginContainer: {
-    width:'100%',
-    paddingHorizontal: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   imageProfile: {
     width: 150,
     height: 150,
   },
-  changeName: {
+  viewChangeName: {
     width: '100%',
     marginTop: 50,
     alignItems: 'center'
   },
-  inputLogin: {
+  inputName: {
     height: 50,
     flex: 1,
     padding: 10,
@@ -44,18 +57,6 @@ export default styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     backgroundColor: colors.violet,
-  },
-  buttons: {
-    width: "100%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 20,
-    backgroundColor: colors.violet,
-  },
-  noAccount: {
-    marginTop: 20
   },
   errorDialog: {
     flexDirection: 'row', 

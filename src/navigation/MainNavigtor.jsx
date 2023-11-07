@@ -16,7 +16,8 @@ const MainNavigator = () => {
     fetchSession()
       .then(
         value => {
-          if (typeof value[0].email !== 'undefined') {
+          const isInLocal = value.find((val) => val.email !== '');
+          if (typeof isInLocal !== 'undefined') {
             dispatch(setUser({ email: value[0].email, username: value[0].username, id_user: value[0].id_user }))
             dispatch(setImageProfile(value[0].image_profile))
           }
@@ -24,13 +25,6 @@ const MainNavigator = () => {
         error => { console.log(error) }
       );
   }, [])
-
-  //const {data} = useGetProfileImageQuery(localId)
-  //useEffect(()=>{
-  //  if(data){
-  //    dispatch(setImageProfile(data.image))
-  //  }
-  //}, [data])
 
   return user ? <BottomTabNavigator /> : <StackAuthNavigator />
 }

@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    user: null,
-    note: null,
+    notes: null,
 }
 
 export const noteSlice = createSlice({
@@ -11,7 +10,7 @@ export const noteSlice = createSlice({
     reducers: {
         setNote: (state, action) => {
             return {
-                note : [...note,action.payload],
+                notes: action.payload
             }
         },
     }

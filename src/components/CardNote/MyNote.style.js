@@ -4,11 +4,19 @@ import { colors } from '../../constants/colors'
 export default styles = StyleSheet.create({
   container: {
     backgroundColor: colors.aquaStrong,
-    height: 150,
+    minHeight: 100,
     width: '100%',
     marginVertical: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
     borderRadius: 15,
   },
+  title: {
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  content: {
+    marginTop: 5,
+  },
+  containerText: {
+    margin: 10
+  }
 })

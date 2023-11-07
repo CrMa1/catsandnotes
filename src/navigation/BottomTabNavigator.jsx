@@ -29,7 +29,7 @@ function BottomTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Notes"
+        name="BottomNotes"
         component={StackNoteNavigator}
         options={{
           tabBarIcon: ({ focused }) => (

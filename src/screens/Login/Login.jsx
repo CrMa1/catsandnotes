@@ -52,7 +52,7 @@ const Login = ({ navigation }) => {
       dispatch(setImageProfile(response.dataUser['imagen_perfil']))
       insertSession({
         id_user: response.dataUser['id_usuario'],
-        image_profile: response.dataUser['imagen_perfil'],
+        image_profile: (response.dataUser['imagen_perfil']!== null)?response.dataUser['imagen_perfil']:'',
         email: email,
         username: response.dataUser['nombre']
       })

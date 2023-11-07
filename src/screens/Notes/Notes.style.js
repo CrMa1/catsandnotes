@@ -16,5 +16,18 @@ export default styles = StyleSheet.create({
     fontSize: 26,
     textAlign: 'center',
     marginVertical: 20
-  }
+  },
+  imageEmpty: {
+    width: 300,
+    height: 300
+  },
+  addFirstNote: {
+    width: "80%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    backgroundColor: colors.melon,
+  },
 })

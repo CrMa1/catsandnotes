@@ -9,6 +9,7 @@ import { ChangeImageProfile, ChangeMyName } from '../../services/authApiAxios'
 import { updateSession } from '../../db'
 import { setImageProfile, setUser } from '../../features/auth/authSlice'
 import { deleteSession } from '../../db'
+import { setNote } from '../../features/note/noteSlice'
 
 const Settings = () => {
 
@@ -29,6 +30,7 @@ const Settings = () => {
   const [dialogTxt, setDialogTxt] = useState('Ocurrió un error inesperado, inténtalo más tarde.');
   const [titleModal, setTitleModal] = useState('')
 
+  //Checar los permisos de la cámara
   const verifyCameraPermissions = async () => {
     const { granted } = await ImagePicker.requestCameraPermissionsAsync()
     if (!granted) {
@@ -40,6 +42,7 @@ const Settings = () => {
     return true
   }
 
+  //Tomar foto con la cámara
   const pickImage = async () => {
     const isCameraOk = await verifyCameraPermissions()
     if (isCameraOk) {
@@ -49,13 +52,14 @@ const Settings = () => {
         aspect: [9, 16],
         base64: true,
         quality: 0.5,
-      })
+      });
       if (!result.canceled) {
         dispatch(setImageProfile(`data:image/jpeg;base64,${result.assets[0].base64}`))
       }
     }
   }
 
+  //Tomar foto desde la galeria
   const pickImageGalery = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -69,6 +73,7 @@ const Settings = () => {
     }
   }
 
+  //Confirmar cambio de img
   const confirmImage = async () => {
     const response = await ChangeImageProfile({ image: image, id_user: id_user });
     if (response.code === 200) {
@@ -82,10 +87,12 @@ const Settings = () => {
     toggleDialog()
   }
 
+  //Mostrar modal
   const toggleDialog = () => {
     setDialogVisible(!dialogVisible);
   };
 
+  //Cambiar nombre de la cuenta
   const changeName = async () => {
     const response = await ChangeMyName({ name: name, id_user: id_user });
     if (response.code === 200) {
@@ -101,6 +108,7 @@ const Settings = () => {
     toggleDialog()
   }
 
+  //Cambios en local
   const changeInLocal = user => {
     updateSession({
       image_profile: user['imagen_perfil'],
@@ -109,18 +117,21 @@ const Settings = () => {
     });
   }
 
+  //Cerrar Sesión
   const logout = () => {
-    deleteSession()
     dispatch(setUser({ id_user: null, email: null, username: null }))
-    dispatch(setImageProfile(null))
+    dispatch(setNote([]))
+    dispatch(setImageProfile(''))
+    deleteSession()
   }
+
 
   return (
     <KeyboardAvoidingView
       style={styles.container}
       behavior={'padding'}
       keyboardVerticalOffset={32}>
-      <View style={styles.loginContainer}>
+      <View style={styles.settingsContainer}>
         {image
           ?
           <Image
@@ -132,8 +143,8 @@ const Settings = () => {
           />
           :
           <Image
-            style={styles.imageProfile}
-            source={require('../../images/login.png')}
+            style={styles.noImage}
+            source={require('../../images/noimage.png')}
           />
         }
         <View style={styles.buttonsImages}>
@@ -144,20 +155,20 @@ const Settings = () => {
             <Text>Seleccionar Foto</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.buttons} onPress={confirmImage}>
+        <TouchableOpacity style={styles.buttonConfirm} onPress={confirmImage}>
           <Text>Confirmar la nueva foto</Text>
         </TouchableOpacity>
-        <View style={styles.changeName}>
+        <View style={styles.viewChangeName}>
           <Input
             placeholder='Nombre'
             leftIcon={{ type: 'font-awesome', name: 'paw' }}
-            style={styles.inputLogin}
+            style={styles.inputName}
             errorStyle={{ color: 'red' }}
             errorMessage={errorName}
             value={name}
             onChangeText={value => { setName(value); setErrorName('') }}
           />
-          <TouchableOpacity style={styles.buttons} onPress={changeName}>
+          <TouchableOpacity style={styles.buttonConfirm} onPress={changeName}>
             <Text>Cambiar nombre</Text>
           </TouchableOpacity>
         </View>

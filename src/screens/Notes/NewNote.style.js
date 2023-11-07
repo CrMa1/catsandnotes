@@ -8,22 +8,13 @@ export default styles = StyleSheet.create({
     paddingTop:'25%',
     justifyContent:'center',
   },
-  contentImage: {
-    flex: 1,
-    backgroundColor: colors.white,
-    justifyContent:'center',
-    alignItems: 'center',
-  },
-  imageLogin: {
-    marginBottom: 40
-  },
   inputDescription: {
     backgroundColor: colors.melon,
     width:'90%',
-    maxHeight: 400,
+    maxHeight: 250,
     minHeight: 100,
     borderRadius: 15,
-    textAlign:'center',
+    padding: 15,
   },
   InputView: {
     paddingBottom: 30,

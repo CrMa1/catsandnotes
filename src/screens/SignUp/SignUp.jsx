@@ -59,6 +59,7 @@ const SignUp = ({ navigation }) => {
       dispatch(setUser({ id_user:response.dataUser[0], email: email,username: response.dataUser[1]}))
       insertSession({
         id_user: response.dataUser[0],
+        image_profile: '',
         email: email,
         username: response.dataUser[1]
       })
@@ -81,7 +82,7 @@ const SignUp = ({ navigation }) => {
       behavior={'padding'}
       keyboardVerticalOffset={32}
     >
-      <View style={styles.loginContainer}>
+      <View style={styles.signupContainer}>
         <Input
           placeholder='Nombre'
           leftIcon={{ type: 'font-awesome', name: 'paw' }}
@@ -115,7 +116,7 @@ const SignUp = ({ navigation }) => {
         <TouchableOpacity style={styles.loginBtn} onPress={signUp}>
           <Text>Registrarme</Text>
         </TouchableOpacity>
-        <View style={styles.noAccount}>
+        <View style={styles.haveAccount}>
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Text>Iniciar Sesión</Text>
           </TouchableOpacity>

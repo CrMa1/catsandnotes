@@ -8,14 +8,11 @@ export default styles = StyleSheet.create({
     justifyContent:'center',
     alignItems: 'center',
   },
-  loginContainer: {
+  signupContainer: {
     width:'100%',
     paddingHorizontal: 20,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  imageLogin: {
-    marginBottom: 40
   },
   inputLogin: {
     height: 50,
@@ -32,7 +29,7 @@ export default styles = StyleSheet.create({
     marginTop: 40,
     backgroundColor: colors.violet,
   },
-  noAccount: {
+  haveAccount: {
     marginTop: 20
   },
   bobbleBottom: {

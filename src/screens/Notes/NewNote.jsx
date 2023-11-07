@@ -6,12 +6,15 @@ import { DoNote } from '../../services/authApiAxios'
 import { useSelector } from 'react-redux'
 import DialogAlert from '../../components/Dialog/DialogAlert'
 import { navigationPush } from '../../components/NavigationMethods/NavigationMethods'
-//import { setNote } from '../../features/note/noteSlice'
+import { setNote } from '../../features/note/noteSlice'
+import { useDispatch } from 'react-redux'
 
 const NewNote = () => {
-  
+  const dispatch = useDispatch();
+
   //Trae el id usuario de la sesión de redux
   const { id_user } = useSelector(state => state.auth)
+  const { notes } = useSelector(state => state.note)
 
   //Guarda valores de inputs
   const [title, setTitle] = useState('')
@@ -26,7 +29,7 @@ const NewNote = () => {
 
   const toggleDialog = () => {
     setDialogVisible(!dialogVisible);
-  };
+  }
 
   //Guardar la nota
   const saveNote = async () => {
@@ -36,16 +39,15 @@ const NewNote = () => {
 
     const response = await DoNote({ title: title, content: content, id_user: id_user });
     if (response.code === 200) {
-      navigationPush('Saved')
+      dispatch(setNote([...notes,{titulo: title, contenido: content, id_nota: response['id_note']}]))
       setTitle('')
       setContent('')
-      //dispatch(setNote({ id_user:response.dataUser[0], email: email,username: response.dataUser[1]}))
+      navigationPush('Saved')
     } else {
       setDialogTxt('Algo salió mal, inténtalo de nuevo más tarde.')
       toggleDialog()
     }
   }
-
 
   return (
     <View style={styles.container}>
@@ -56,6 +58,7 @@ const NewNote = () => {
           inputContainerStyle={{ width: '90%' }}
           errorStyle={{ color: 'red' }}
           errorMessage={errorTitle}
+          value={title}
           onChangeText={value => { setTitle(value); setErrorTitle('') }}
         />
       </View>
@@ -65,7 +68,9 @@ const NewNote = () => {
           style={styles.inputDescription}
           onChangeText={value => { setContent(value) }}
           numberOfLines={10}
-          placeholder='Escribe aquí el contenido de tu nueva Nota' />
+          value={content}
+          placeholder='Escribe aquí el contenido de tu nueva Nota' 
+        />
       </View>
       <View style={styles.buttonView}>
         <Pressable

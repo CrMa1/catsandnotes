@@ -8,7 +8,18 @@ export default styles = StyleSheet.create({
     justifyContent:'center',
     alignItems: 'center',
   },
-  imageLogin: {
-    marginBottom: 40
+  imageEmpty: {
+    marginBottom: 40,
+    width: 200,
+    height: 200,
+  },
+  btnBack: {
+    width: "80%",
+    borderRadius: 25,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 40,
+    backgroundColor: colors.aqua,
   },
 })

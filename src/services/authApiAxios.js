@@ -2,6 +2,7 @@ import axios from 'axios';
 const baseUrl = 'https://parroquialaresurreccionhgo.com.mx/api';
 const abortController = new AbortController();
 
+//Registra un nuevo usuario
 export const Register = async ({ name, email, password }) => {
   const url = `${baseUrl}/registro.php`;
   try {
@@ -25,6 +26,7 @@ export const Register = async ({ name, email, password }) => {
   }
 };
 
+//Loggea un usuario existente
 export const LoginUser = async ({ email, password }) => {
   const url = `${baseUrl}/login.php`;
   try {
@@ -47,7 +49,7 @@ export const LoginUser = async ({ email, password }) => {
   }
 };
 
-
+//Trae las notas del usuario loggeado
 export const GetNotes = async ({ id_user }) => {
   const url = `${baseUrl}/notas.php`;
   try {
@@ -69,6 +71,7 @@ export const GetNotes = async ({ id_user }) => {
   }
 };
 
+//Crea una nueva nota
 export const DoNote = async ({ title, content, id_user }) => {
   const url = `${baseUrl}/insert.php`;
   try {
@@ -92,6 +95,7 @@ export const DoNote = async ({ title, content, id_user }) => {
   }
 };
 
+//Cambia la imagen del usuario
 export const ChangeImageProfile = async ({ image, id_user }) => {
   const url = `${baseUrl}/updateImage.php`;
   try {
@@ -114,6 +118,7 @@ export const ChangeImageProfile = async ({ image, id_user }) => {
   }
 };
 
+//Cambia el nombre del usuario
 export const ChangeMyName = async ({ name, id_user }) => {
   const url = `${baseUrl}/updateName.php`;
   try {

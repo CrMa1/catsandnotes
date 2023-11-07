@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  id_user: null,
   user: null,
   username: null,
   imageProfile: null,
@@ -18,7 +19,7 @@ export const authSlice = createSlice({
       }
     },
     clearUser: () => {
-      return { user: null, username: null }
+      return { id_user: null, user: null, username: null }
     },
     setImageProfile: (state, action) => {
       return {
