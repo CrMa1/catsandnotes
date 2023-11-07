@@ -21,7 +21,7 @@ I'm a full stack developer on web, iOS and Android.
 
 ## Tech Stack
 
-**Client:** React Native, Redux
+**Client:** React Native, Redux, Axios, React Native Elements
 
 **Server:** PHP, MySql
 
