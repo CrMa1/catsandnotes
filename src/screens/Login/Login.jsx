@@ -41,8 +41,8 @@ const Login = ({ navigation }) => {
   const setLogin = async () => {
 
     //Errores para inputs vacíos
-    email === '' ? setErrorEmail('Inresa un Correo') : setErrorEmail('')
-    password === '' ? setErrorPass('Inresa una Contraseña') : setErrorPass('')
+    email === '' ? setErrorEmail('Ingresa un Correo') : setErrorEmail('')
+    password === '' ? setErrorPass('Ingresa una Contraseña') : setErrorPass('')
     if (email === '' || password === '') { return false }
 
     const response = await LoginUser({ email: email, password: password });

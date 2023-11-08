@@ -34,7 +34,7 @@ const NewNote = () => {
   //Guardar la nota
   const saveNote = async () => {
 
-    title === '' ? setErrorTitle('Inresa un Título') : setErrorTitle('')
+    title === '' ? setErrorTitle('Ingresa un Título') : setErrorTitle('')
     if (title === '') { return false }
 
     const response = await DoNote({ title: title, content: content, id_user: id_user });

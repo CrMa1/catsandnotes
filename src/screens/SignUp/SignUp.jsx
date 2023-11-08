@@ -47,9 +47,9 @@ const SignUp = ({ navigation }) => {
   const signUp = async () => {
 
     //Errores para inputs vacíos
-    name === '' ? setErrorName('Inresa un Nombre') : setErrorName('')
-    email === '' ? setErrorEmail('Inresa un Correo') : setErrorEmail('')
-    password === '' ? setErrorPass('Inresa una Contraseña') : setErrorPass('')
+    name === '' ? setErrorName('Ingresa un Nombre') : setErrorName('')
+    email === '' ? setErrorEmail('Ingresa un Correo') : setErrorEmail('')
+    password === '' ? setErrorPass('Ingresa una Contraseña') : setErrorPass('')
     if (name === '' || email === '' || password === '') { return false }
 
     const response = await Register({ name: name, email: email, password: password });
