@@ -8,6 +8,7 @@ Add an Image for your profile from camera or gallery.
 Change your name and image on Settings Screen.
 You can't edit or delte a note yet.
 The forms are validated so as not to enter empty fields.
+Validation from duplicate users.
 
 
 ## Authors
